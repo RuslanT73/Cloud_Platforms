@@ -1,0 +1,25 @@
+name: Test Celendar Flask App
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repo code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test Flask app
+        run: |
+          cd tests
+          python test_index.py
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Simulation of deploying app
+        run: echo Your application has been deployed successful
+      
+      
